@@ -23,8 +23,22 @@ const OrderRequest = () => {
     {id:'#01', customerName:'John Doe', date:'01/05/2025', payment:'success', totalAmount:'400Rs', mobile:'012****564', method:'COD', status:'Not Delivered', Action:<FaEye className='h-5 w-7'/>, address:'Raipur', deliveryBoy:'Anil', assign:<FaAnglesRight className='text-2xl text-blue-500'/>},
     {id:'#01', customerName:'John Doe', date:'01/05/2025', payment:'pending', totalAmount:'400Rs', mobile:'012****564', method:'online', status:'Delivered', Action:<FaEye className='h-5 w-7'/>, address:'Raipur', deliveryBoy:'Anil', assign:<FaAnglesRight className='text-2xl text-blue-500'/>},
     {id:'#01', customerName:'John Doe', date:'01/05/2025', payment:'pending', totalAmount:'400Rs', mobile:'012****564', method:'COD', status:'Delivered', Action:<FaEye className='h-5 w-7'/>, address:'Raipur', deliveryBoy:'Anil', assign:<FaAnglesRight className='text-2xl text-blue-500'/>},
-  
   ]
+
+  const [currentPage, setCurrentPage] = useState(1);
+      const rowsPerPage = 7;
+  
+      const indexOfLastRow = currentPage * rowsPerPage;
+      const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+      const currentRows = orderData.slice(indexOfFirstRow, indexOfLastRow);
+  
+      const totalPages = Math.ceil(orderData.length / rowsPerPage);
+  
+      const goToPage = (pageNum) => {
+          if (pageNum >= 1 && pageNum <= totalPages) {
+              setCurrentPage(pageNum);
+          }
+      }
 
   return (
     <div className='container '>
@@ -70,7 +84,7 @@ const OrderRequest = () => {
           </tr>
         </thead>
         <tbody>
-          {orderData.map((item, idx)=>(
+          {currentRows.map((item, idx)=>(
             <tr key={idx} className='border border-collapse '>
               <td className='px-4 py-3 border'>{item.id}</td>
               <td className='px-4 py-3 border'>{item.customerName}</td>
@@ -101,11 +115,27 @@ const OrderRequest = () => {
           ))}
         </tbody>
       </table>
+      <div className='flex justify-between mt-3'>
+                <button
+                    onClick={() => goToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className='bg-gray-200 hover:bg-gray-300 px-1 rounded-lg cursor-pointer disabled:opacity-50'
+                >
+                    Previous
+                </button>
+                <span>Page {currentPage} of {totalPages}</span>
+                <button
+                    onClick={() => goToPage(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className='bg-gray-200 hover:bg-gray-300 px-1 rounded-lg cursor-pointer disabled:opacity-50'
+                >
+                    Next
+                </button>
+            </div>
       </div>
     </div>
   )
 }
 
 export default OrderRequest
-
 

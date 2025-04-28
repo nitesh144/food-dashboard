@@ -13,11 +13,11 @@ const StockManagement = () => {
     { id: 7, Image: img, name: 'Rahul', quantity: '50ml', package: 'packet', stock: '2000', status: 'Available' },
     { id: 8, Image: img, name: 'Rahul', quantity: '50ml', package: 'packet', stock: '2000', status: 'Available' },
     { id: 9, Image: img, name: 'Rahul', quantity: '50ml', package: 'packet', stock: '2000', status: 'Available' },
-    { id: 10, Image: img, name: 'Rahul', quantity: '50ml', package: 'packet', stock: '2000', status: 'Available' },
+    { id: 10, Image: img, name: 'Rahul', quantity: '50ml', package: 'packet', stock: '2000', status: 'Available'},
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 10;
+  const rowsPerPage = 7;
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -32,7 +32,7 @@ const StockManagement = () => {
   };
 
   return (
-    <div className='flex flex-col w-full p-4'>
+    <div className='flex flex-col w-full '>
       <h1 className='text-2xl font-bold mb-4'>Stock Management</h1>
       <div className='flex-grow overflow-auto bg-white rounded shadow'>
         <div className='min-w-max overflow-x-auto'>
@@ -59,7 +59,7 @@ const StockManagement = () => {
                   <td className="px-4 py-3 border">{item.package}</td>
                   <td className="px-4 py-3 border">{item.stock}</td>
                   <td className="px-4 py-3 border">{item.status}</td>
-                  <td className="px-4 py-3 border"><CiEdit className='cursor-pointer text-blue-600 text-4xl ' /></td>
+                  <td className="px-4 py-3 border"><CiEdit className='cursor-pointer text-blue-600 text-4xl'/></td>
                 </tr>
               ))}
             </tbody>

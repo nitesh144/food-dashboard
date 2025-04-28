@@ -26,7 +26,7 @@ const Navbar = () => {
                             <img src={user} alt="userlogo"  className='w-10 h-10 border rounded-full'/>
                         </div>
                         <div>
-                            <h4 className='font-bold'>Remti Rashmi</h4>
+                            <h4 className='font-bold text-xl'> Rashmi Sahu</h4>
                             <div className='flex items-center gap-2'>
                                 <p className='text-xs'>Edit profile</p>
                                 <CiEdit className='cursor-pointer'/>

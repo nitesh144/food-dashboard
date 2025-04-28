@@ -1,4 +1,119 @@
+// import React, { useState } from 'react'
+// import { ImUsers } from "react-icons/im";
+// import {
+//   MdDashboard,
+//   MdBorderColor,
+//   MdOutlineAddShoppingCart,
+//   MdExpandLess,
+//   MdExpandMore,
+// } from "react-icons/md";
+// import { RiUserSettingsFill } from "react-icons/ri";
+// import { Link, useLocation } from "react-router-dom";
+// import { GiProgression } from "react-icons/gi";
+// import { TbCategoryPlus, TbTruckDelivery } from "react-icons/tb";
+// import { FaBoxOpen } from "react-icons/fa";
+// import { HiOutlineClipboardDocumentList, HiUsers } from "react-icons/hi2";
 
+
+// const Sidebar = () => {
+//   const location = useLocation();
+//   const [openMenu, setOpenMenu] = useState(null);
+
+//   // Ensure only one menu can be open at a time
+//   const toggleMenu = (menu) => {
+//     setOpenMenu((prev) => (prev === menu ? null : menu));
+//   };
+
+//   const listItems = [
+//     { id: 1, title: 'Dashboard', icon: <MdDashboard size={25} />, path: '/' },
+//     { id: 2, title: 'Stock Management', icon: <GiProgression size={25} />, path: '/stock-management' },
+//     {
+//       id: 3, title: 'Order', icon: <MdOutlineAddShoppingCart size={25} />,
+//       subroute: [
+//         { title: 'Order Request', path: '/order-request' },
+//         { title: 'Orders', path: '/orders' }
+//       ]
+//     },
+//     { id: 4, title: 'Product', icon: <FaBoxOpen size={25} />, path: '/products' },
+//     { id: 5, title: 'Category', icon: <TbCategoryPlus size={25} />, path: '/category' },
+//     {
+//       id: 6, title: 'Delivery Boys', icon: <TbTruckDelivery size={25} />,
+
+//       subroute: [
+//         { title: 'Delivery Boy Add', path: '/delivery-boy-add' },
+//         { title: 'Delivery Boy Request', path: '/delivery-boy-request' },
+//         { title: 'Delivery Boy Managed', path: '/delivery-boy-managed' },
+//         { title: 'Delivery Boy Cash', path: '/delivery-boy-cash' },
+//       ]
+//     },
+//     { id: 7, title: 'Reports', icon: <HiOutlineClipboardDocumentList size={25} />, path: '/reports' },
+//     {
+//       id: 8, title: 'Employee', icon: <RiUserSettingsFill size={25} />,
+//       subroute: [
+//         { title: 'Add Employee', path: '/add-employee' },
+//         { title: 'Employee List', path: '/employee-list' }
+//       ]
+//     },
+//   ]
+//   return (
+//     <div className=' w-64 bg-[#ad011d] text-white p-5 rounded-lg shadow-lg overflow-y-auto'>
+//       <ul className="space-y-2 mt-5">
+//         {listItems.map((item) => (
+//           <li key={item.id}>
+//             {item.subroute ? (
+//               <div>
+//                 <button
+//                   className={`w-full flex items-center justify-between px-6 py-3 cursor-pointer`}
+//                   onClick={() => toggleMenu(item.title)}
+//                 >
+//                   <div className="flex items-center gap-3">
+//                     {item.icon} <span>{item.title}</span>
+//                   </div>
+//                   {openMenu === item.title ? (
+//                     <MdExpandLess className='h-6 w-6'/>
+//                   ) : (
+//                     <MdExpandMore className='h-6 w-6'/>
+//                   )}
+//                 </button>
+
+//                 {openMenu === item.title && (
+//                   <ul className="ml-8 space-y-2">
+//                     {item.subroute.map((subItem, subIndex) => (
+//                       <li key={subIndex}>
+//                         <Link
+//                           to={subItem.path}
+//                           className={`block px-4 py-2 text-sm rounded transition-transform hover:translate-x-2 ${location.pathname === subItem.path
+//                             ? "bg-gray-300 text-black "
+//                             : "text-white"
+//                             }`}
+//                         >
+//                           {subItem.title}
+//                         </Link>
+//                       </li>
+//                     ))}
+//                   </ul>
+//                 )}
+//               </div>
+//             ) : (
+//               <Link
+//                 to={item.path}
+//                 className={` px-6 py-3 flex items-center gap-3 cursor-pointer ${location.pathname === item.path
+//                   ? "bg-red-300 text-black"
+//                   : "bg-[#ad011d]"
+//                   }`}
+//                 onClick={() => setOpenMenu(null)} // Close dropdown if a main menu is clicked
+//               >
+//                 {item.icon} <span>{item.title}</span>
+//               </Link>
+//             )}
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   )
+// }
+
+// export default Sidebar
 
 
 import React, { useState, useEffect } from 'react';
@@ -26,18 +141,18 @@ const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
 
   // Update isMobile state on window resize
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     const mobile = window.innerWidth < 768;
-  //     setIsMobile(mobile);
-  //     if (!isCollapsed && mobile) {
-  //       setIsCollapsed(true);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!isCollapsed && mobile) {
+        setIsCollapsed(true);
+      }
+    };
 
-  //   window.addEventListener('resize', handleResize);
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, [isCollapsed]);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isCollapsed]);
 
   // Ensure only one menu can be open at a time
   const toggleMenu = (menu) => {
@@ -60,21 +175,20 @@ const Sidebar = () => {
       id: 6, title: 'Delivery Boys', icon: <TbTruckDelivery size={22} />,
       subroute: [
         { title: 'Add Delivery Boy ', path: '/delivery-boy-add' },
-        { title: 'Delivery Boy Requests', path: '/delivery-boy-request' },
-        { title: 'Manage Delivery Boy ', path: '/delivery-boy-managed' },
+        { title: 'Delivery Boy Request', path: '/delivery-boy-request' },
+        { title: 'Managed Delivery Boy ', path: '/delivery-boy-managed' },
         { title: 'Delivery Boy Cash', path: '/delivery-boy-cash' },
         {title:'Delivery Boy Policy', path:'/delivery-boy-policy'}
       ]
     },
-    
+    { id: 7, title: 'Reports', icon: <HiOutlineClipboardDocumentList size={22} />, path: '/reports' },
     {
-      id: 7, title: 'Employee', icon: <RiUserSettingsFill size={22} />,
+      id: 8, title: 'Employee', icon: <RiUserSettingsFill size={22} />,
       subroute: [
         { title: 'Add Employee', path: '/add-employee' },
         { title: 'Employee List', path: '/employee-list' }
       ]
     },
-    { id: 8, title: 'Reports', icon: <HiOutlineClipboardDocumentList size={22} />, path: '/reports' },
   ];
 
   // Calculate if current path is in a subroute to auto-expand that menu
@@ -131,8 +245,8 @@ const Sidebar = () => {
   // }
 
   return (
-    <div className="fixed top-32 left-0 mb-10 rounded-lg bottom-0 z-20 bg-[#ad011d] text-white shadow-lg transition-all duration-300 ease-in-out" style={{ width: '260px' }}>
-      <div className="h-full flex flex-col mt-10  ">
+    <div className="fixed top-32 left-0 rounded-lg mb-5 bottom-0 z-20 bg-[#ad011d] text-white shadow-lg transition-all duration-300 ease-in-out" style={{ width: '260px' }}>
+      <div className="h-full flex flex-col">
         {/* Header with collapse button */}
         {/* <div className="flex justify-end p-4">
           <button 
@@ -144,7 +258,7 @@ const Sidebar = () => {
         </div> */}
         
         {/* Scrollable menu - independent scrolling */}
-        <div className="flex-grow overflow-y-auto customScrollbar pr-2">
+        <div className="flex-grow overflow-y-auto customScrollbar pr-2 mt-8 ml-2">
           <ul className="space-y-1">
             {listItems.map((item) => (
               <li key={item.id}>
@@ -174,7 +288,7 @@ const Sidebar = () => {
                           <li key={subIndex}>
                             <Link
                               to={subItem.path}
-                              className={`block px-4 py-2 text-lg rounded-md transition-all ${
+                              className={`block px-4 py-2 text-md rounded-md transition-all ${
                                 location.pathname === subItem.path
                                   ? "bg-gray-300 text-black font-medium"
                                   : "text-white hover:bg-red-700"
